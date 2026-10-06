@@ -1,0 +1,734 @@
+<project name="Analytical_Check" version="4.6.2" schema="" Target="EMTDC">
+  <paramlist name="Settings">
+    <param name="creator" value="t18ma25,1788611649" />
+    <param name="time_duration" value="0.5" />
+    <param name="time_step" value="50" />
+    <param name="sample_step" value="250" />
+    <param name="chatter_threshold" value=".001" />
+    <param name="branch_threshold" value=".0005" />
+    <param name="StartType" value="0" />
+    <param name="PlotType" value="0" />
+    <param name="output_filename" value="$(Namespace).out" />
+    <param name="SnapType" value="0" />
+    <param name="SnapTime" value="0.3" />
+    <param name="snapshot_filename" value="$(Namespace).snp" />
+    <param name="MrunType" value="0" />
+    <param name="Mruns" value="1" />
+    <param name="Scenario" value="" />
+    <param name="Advanced" value="2047" />
+    <param name="Options" value="16" />
+    <param name="Build" value="18" />
+    <param name="Warn" value="5" />
+    <param name="Check" value="0" />
+    <param name="description" value="Analytical RLC model - five blocks" />
+    <param name="labels" value="" />
+    <param name="Source" value="&quot;C:\Users\t18ma25\PSCAD_Work\HVDC_Analytical_Blocks\analytical_rlc.f&quot;" />
+    <param name="Preprocessor" value="" />
+    <param name="revisor" value="t18ma25, 1791206929" />
+  </paramlist>
+  <paramlist name="Libs" />
+  <Layers />
+  <List classid="Settings" />
+  <definitions>
+    <Definition classid="UserCmpDefn" name="AN_Block1" group="" url="" version="" build="" crc="70039729" instances="1" key="" view="false" date="0" id="1274500011">
+      <paramlist name="">
+        <param name="Description" value="Block 1 - cable geometry, materials and penetration factors" />
+      </paramlist>
+      <form name="" w="460" h="520" splitter="60">
+        <category name="Configuration" visible="true">
+          <cond />
+          <parameter desc="Name" name="Name" group="" type="Text" helpmode="Append" allowemptystr="True">
+            <value />
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+        </category>
+        <category name="Core and frequency" visible="true">
+          <cond />
+          <parameter desc="Frequency f [Hz]" name="F" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>50.0</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Core outer radius r_c [m]" name="RC" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.03</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Core area from datasheet A_c,man [m2]" name="AC_M" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.0025</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Copper resistivity at 20 C rho_c0 [ohm.m]" name="RHOC0" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>1.7241E-8</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Core stranding allowance s_c [-]" name="SC" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.02</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Core DC resistance from datasheet [ohm/km]" name="RCMAN" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.0072</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Use datasheet R_c?  1 = yes, 0 = computed" name="BASIS" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>1.0</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Core relative permeability mu_r,c [-]" name="MURC" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>1.0</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+        </category>
+        <category name="Sheath" visible="true">
+          <cond />
+          <parameter desc="Sheath inner radius r_s,i [m]" name="RSI" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.0598</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Sheath outer radius r_s,o [m]" name="RSO" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.063</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Lead sheath resistivity rho_s [ohm.m]" name="RHOS" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>2.14E-7</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Sheath relative permeability mu_r,s [-]" name="MURS" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>1.0</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+        </category>
+        <category name="Armour" visible="true">
+          <cond />
+          <parameter desc="Armour inner radius r_a,i [m]" name="RAI" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.0672</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Armour outer radius r_a,o [m]" name="RAO" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.0732</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Number of armour wires n_a,w [-]" name="ANW" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>68.0</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Armour wire diameter d_w [m]" name="DW" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.006</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Armour wire resistivity rho_a,w [ohm.m]" name="RHOAW" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>1.38E-7</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Armour lay allowance s_a [-]" name="SA" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.048</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Armour relative permeability mu_r,a [-]" name="MURA" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>10.0</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+        </category>
+        <category name="Seabed" visible="true">
+          <cond />
+          <parameter desc="Burial depth below seabed h [m]" name="H" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>1.0</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Seabed resistivity rho_g [ohm.m]" name="RHOG" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.67</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Seabed relative permeability mu_r,g [-]" name="MURG" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>1.0</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+        </category>
+      </form>
+      <svg viewBox="-200 -200 200 200" size="6">
+        <cond><![CDATA[true]]></cond>
+        <rect x="-63" y="-27" width="126" height="54" stroke="black" stroke-width="0.2" stroke-dasharray="none" fill-style="Hollow" fill-fg="black" fill-bg="black" />
+        <text x="0" y="-15" stroke="Black" fill="Black" font-size="Medium"><![CDATA[BLOCK 1]]></text>
+        <text x="0" y="0" stroke="Black" fill="Black" font-size="Small"><![CDATA[Geometry and materials]]></text>
+        <text x="0" y="15" stroke="Black" fill="Black" font-size="Small"><![CDATA[feeds 2, 3 and 5]]></text>
+      </svg>
+      <script>
+        <segment name="Fortran"><![CDATA[      CALL ANB1($F, $RC,
+     &          $AC_M, $RHOC0,
+     &          $SC, $RCMAN,
+     &          $BASIS, $MURC,
+     &          $RSI, $RSO,
+     &          $RHOS, $MURS,
+     &          $RAI, $RAO,
+     &          $ANW, $DW,
+     &          $RHOAW, $SA,
+     &          $MURA, $H,
+     &          $RHOG, $MURG)]]></segment>
+        <segment name="Branch"><![CDATA[]]></segment>
+        <segment name="Computations"><![CDATA[]]></segment>
+      </script>
+    </Definition>
+    <Definition classid="UserCmpDefn" name="AN_Block2" group="" url="" version="" build="" crc="102913826" instances="1" key="" view="false" date="0" id="1274500012">
+      <paramlist name="">
+        <param name="Description" value="Block 2 - conductor internal, surface and transfer impedances" />
+      </paramlist>
+      <form name="" w="460" h="520" splitter="60">
+        <category name="Configuration" visible="true">
+          <cond />
+          <parameter desc="Name" name="Name" group="" type="Text" helpmode="Append" allowemptystr="True">
+            <value />
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+        </category>
+        <category name="Wedepohl constants" visible="true">
+          <cond />
+          <parameter desc="Coth argument constant, Wedepohl 0.733 [-]" name="WK1" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.733</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="DC term constant, Wedepohl 0.3179 [-]" name="WK2" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.3179</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+        </category>
+      </form>
+      <svg viewBox="-200 -200 200 200" size="6">
+        <cond><![CDATA[true]]></cond>
+        <rect x="-63" y="-27" width="126" height="54" stroke="black" stroke-width="0.2" stroke-dasharray="none" fill-style="Hollow" fill-fg="black" fill-bg="black" />
+        <text x="0" y="-15" stroke="Black" fill="Black" font-size="Medium"><![CDATA[BLOCK 2]]></text>
+        <text x="0" y="0" stroke="Black" fill="Black" font-size="Small"><![CDATA[Conductor impedances]]></text>
+        <text x="0" y="15" stroke="Black" fill="Black" font-size="Small"><![CDATA[needs Block 1]]></text>
+      </svg>
+      <script>
+        <segment name="Fortran"><![CDATA[      CALL ANB2($WK1, $WK2)]]></segment>
+        <segment name="Branch"><![CDATA[]]></segment>
+        <segment name="Computations"><![CDATA[]]></segment>
+      </script>
+    </Definition>
+    <Definition classid="UserCmpDefn" name="AN_Block3" group="" url="" version="" build="" crc="75483335" instances="1" key="" view="false" date="0" id="1274500013">
+      <paramlist name="">
+        <param name="Description" value="Block 3 - magnetic regions and seabed return impedance" />
+      </paramlist>
+      <form name="" w="460" h="520" splitter="60">
+        <category name="Configuration" visible="true">
+          <cond />
+          <parameter desc="Name" name="Name" group="" type="Text" helpmode="Append" allowemptystr="True">
+            <value />
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+        </category>
+        <category name="Magnetic regions" visible="true">
+          <cond />
+          <parameter desc="Series model outer radius r_t,Z [m]" name="RTZ" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.0805</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Core to sheath region mu_r [-]" name="MUR12" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>1.0</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Sheath to armour region mu_r [-]" name="MUR23" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>1.0</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Armour to surface region mu_r [-]" name="MUR34" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>1.0</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+        </category>
+      </form>
+      <svg viewBox="-200 -200 200 200" size="6">
+        <cond><![CDATA[true]]></cond>
+        <rect x="-63" y="-27" width="126" height="54" stroke="black" stroke-width="0.2" stroke-dasharray="none" fill-style="Hollow" fill-fg="black" fill-bg="black" />
+        <text x="0" y="-15" stroke="Black" fill="Black" font-size="Medium"><![CDATA[BLOCK 3]]></text>
+        <text x="0" y="0" stroke="Black" fill="Black" font-size="Small"><![CDATA[Magnetic and seabed]]></text>
+        <text x="0" y="15" stroke="Black" fill="Black" font-size="Small"><![CDATA[needs Block 1]]></text>
+      </svg>
+      <script>
+        <segment name="Fortran"><![CDATA[      CALL ANB3($RTZ, $MUR12,
+     &          $MUR23, $MUR34)]]></segment>
+        <segment name="Branch"><![CDATA[]]></segment>
+        <segment name="Computations"><![CDATA[]]></segment>
+      </script>
+    </Definition>
+    <Definition classid="UserCmpDefn" name="AN_Block4" group="" url="" version="" build="" crc="66217445" instances="1" key="" view="false" date="0" id="1274500014">
+      <paramlist name="">
+        <param name="Description" value="Block 4 - primitive series matrix Z, R, L and its PSCAD benchmark" />
+      </paramlist>
+      <form name="" w="460" h="520" splitter="60">
+        <category name="Configuration" visible="true">
+          <cond />
+          <parameter desc="Name" name="Name" group="" type="Text" helpmode="Append" allowemptystr="True">
+            <value />
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+        </category>
+        <category name="PSCAD reference R" visible="true">
+          <cond />
+          <parameter desc="PSCAD Rcc [ohm/km]" name="RCC" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.066423</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="PSCAD Rcs [ohm/km]" name="RCS" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.053861</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="PSCAD Rca [ohm/km]" name="RCA" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.052232</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="PSCAD Rss [ohm/km]" name="RSS" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.227207</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="PSCAD Rsa [ohm/km]" name="RSA" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.052232</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="PSCAD Raa [ohm/km]" name="RAA" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.126711</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+        </category>
+        <category name="PSCAD reference L" visible="true">
+          <cond />
+          <parameter desc="PSCAD Lcc [mH/km]" name="LCC" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>1.751549</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="PSCAD Lcs [mH/km]" name="LCS" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>1.573952</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="PSCAD Lca [mH/km]" name="LCA" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>1.468277</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="PSCAD Lss [mH/km]" name="LSS" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>1.572215</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="PSCAD Lsa [mH/km]" name="LSA" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>1.468277</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="PSCAD Laa [mH/km]" name="LAA" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>1.439964</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+        </category>
+      </form>
+      <svg viewBox="-200 -200 200 200" size="6">
+        <cond><![CDATA[true]]></cond>
+        <rect x="-63" y="-27" width="126" height="54" stroke="black" stroke-width="0.2" stroke-dasharray="none" fill-style="Hollow" fill-fg="black" fill-bg="black" />
+        <text x="0" y="-15" stroke="Black" fill="Black" font-size="Medium"><![CDATA[BLOCK 4]]></text>
+        <text x="0" y="0" stroke="Black" fill="Black" font-size="Small"><![CDATA[Series matrix Z R L]]></text>
+        <text x="0" y="15" stroke="Black" fill="Black" font-size="Small"><![CDATA[needs Blocks 2 and 3]]></text>
+      </svg>
+      <script>
+        <segment name="Fortran"><![CDATA[      CALL ANB4($RCC, $RCS,
+     &          $RCA, $RSS,
+     &          $RSA, $RAA,
+     &          $LCC, $LCS,
+     &          $LCA, $LSS,
+     &          $LSA, $LAA)]]></segment>
+        <segment name="Branch"><![CDATA[]]></segment>
+        <segment name="Computations"><![CDATA[]]></segment>
+      </script>
+    </Definition>
+    <Definition classid="UserCmpDefn" name="AN_Block5" group="" url="" version="" build="" crc="17981112" instances="1" key="" view="false" date="0" id="1274500015">
+      <paramlist name="">
+        <param name="Description" value="Block 5 - primitive shunt matrix C, G, Y and its PSCAD benchmark" />
+      </paramlist>
+      <form name="" w="460" h="520" splitter="60">
+        <category name="Configuration" visible="true">
+          <cond />
+          <parameter desc="Name" name="Name" group="" type="Text" helpmode="Append" allowemptystr="True">
+            <value />
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+        </category>
+        <category name="Geometry" visible="true">
+          <cond />
+          <parameter desc="Main insulation outer radius r_ins,o [m]" name="RINSO" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.054375</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Shunt model outer radius r_t,Y [m]" name="RTY" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.0798</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+        </category>
+        <category name="Permittivity" visible="true">
+          <cond />
+          <parameter desc="Core to sheath relative permittivity [-]" name="ERCS" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>2.4</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Sheath to armour relative permittivity [-]" name="ERSA" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>2.4</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Armour to ground relative permittivity [-]" name="ERAG" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>2.4</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+        </category>
+        <category name="Dielectric loss" visible="true">
+          <cond />
+          <parameter desc="Core to sheath loss tangent [-]" name="TDCS" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.0</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Sheath to armour loss tangent [-]" name="TDSA" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.0</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="Armour to ground loss tangent [-]" name="TDAG" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>0.0</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+        </category>
+        <category name="PSCAD reference Y" visible="true">
+          <cond />
+          <parameter desc="PSCAD Im(Ycc) [S/m]" name="YCC" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>7.053206250E-08</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="PSCAD Im(Yss) [S/m]" name="YSS" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>7.204682270E-07</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="PSCAD Im(Ysa) [S/m]" name="YSA" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>-6.499361650E-07</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+          <parameter desc="PSCAD Im(Yaa) [S/m]" name="YAA" group="" type="Real" unit="" min="-1E308" max="1E308" helpmode="Append">
+            <value>1.135825780E-06</value>
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+        </category>
+      </form>
+      <svg viewBox="-200 -200 200 200" size="6">
+        <cond><![CDATA[true]]></cond>
+        <rect x="-63" y="-27" width="126" height="54" stroke="black" stroke-width="0.2" stroke-dasharray="none" fill-style="Hollow" fill-fg="black" fill-bg="black" />
+        <text x="0" y="-15" stroke="Black" fill="Black" font-size="Medium"><![CDATA[BLOCK 5]]></text>
+        <text x="0" y="0" stroke="Black" fill="Black" font-size="Small"><![CDATA[Shunt matrix C G Y]]></text>
+        <text x="0" y="15" stroke="Black" fill="Black" font-size="Small"><![CDATA[needs Block 1]]></text>
+      </svg>
+      <script>
+        <segment name="Fortran"><![CDATA[      CALL ANB5($RINSO, $RTY,
+     &          $ERCS, $ERSA,
+     &          $ERAG, $TDCS,
+     &          $TDSA, $TDAG,
+     &          $YCC, $YSS,
+     &          $YSA, $YAA)]]></segment>
+        <segment name="Branch"><![CDATA[]]></segment>
+        <segment name="Computations"><![CDATA[]]></segment>
+      </script>
+    </Definition>
+    <Definition classid="StationDefn" name="Station" id="1903814094" group="" url="" version="" build="" crc="13068675" view="false" date="1791202256">
+      <paramlist name="">
+        <param name="Description" value="" />
+      </paramlist>
+      <schematic classid="StationCanvas">
+        <paramlist>
+          <param name="show_grid" value="0" />
+          <param name="size" value="0" />
+          <param name="orient" value="1" />
+          <param name="show_border" value="0" />
+          <param name="monitor_bus_voltage" value="0" />
+          <param name="show_signal" value="0" />
+          <param name="show_virtual" value="0" />
+          <param name="show_sequence" value="0" />
+          <param name="auto_sequence" value="1" />
+        </paramlist>
+        <Wire classid="WireBranch" id="1604938916" name="STUB" x="180" y="180" w="68" h="82" orient="0" defn="STUB" recv="-1" send="-1" back="-1">
+          <vertex x="0" y="0" />
+          <vertex x="0" y="18" />
+          <vertex x="54" y="54" />
+          <vertex x="54" y="72" />
+          <User classid="UserCmp" name="Analytical_Check:Main" id="1604938916" x="0" y="0" w="0" h="0" z="-1" orient="0" defn="Analytical_Check:Main" link="1604938916" q="4">
+            <paramlist link="-1" name="" crc="4361682" />
+          </User>
+        </Wire>
+      </schematic>
+    </Definition>
+    <Definition classid="UserCmpDefn" name="Main" id="1100850662" group="" url="" version="" build="" crc="73468173" view="false" date="1791202256">
+      <paramlist name="">
+        <param name="Description" value="" />
+      </paramlist>
+      <form name="" w="320" h="400" splitter="60" />
+      <svg viewBox="-200 -200 200 200" size="2">
+        <rect x="-36" y="-36" width="72" height="72" stroke="Black" stroke-dasharray="none" stroke-width="0.2" fill-style="Hollow" fill-fg="" fill-bg="" />
+        <text x="0" y="0" stroke="Black" fill="Black" font-size="Small"><![CDATA[%:Name]]></text>
+      </svg>
+      <schematic classid="UserCanvas">
+        <paramlist>
+          <param name="show_grid" value="0" />
+          <param name="size" value="0" />
+          <param name="orient" value="1" />
+          <param name="show_border" value="0" />
+          <param name="monitor_bus_voltage" value="0" />
+          <param name="show_signal" value="0" />
+          <param name="show_virtual" value="0" />
+          <param name="show_sequence" value="0" />
+          <param name="auto_sequence" value="1" />
+        </paramlist>
+        <User classid="UserCmp" name="Analytical_Check:AN_Block1" id="1274500021" x="144" y="234" w="158" h="63" z="1" orient="0" defn="Analytical_Check:AN_Block1" link="-1" q="4">
+          <paramlist link="-1" name="" crc="990181">
+            <param name="Name" value="Block1" />
+            <param name="F" value="50.0" />
+            <param name="RC" value="0.03" />
+            <param name="AC_M" value="0.0025" />
+            <param name="RHOC0" value="1.7241E-8" />
+            <param name="SC" value="0.02" />
+            <param name="RCMAN" value="0.0072" />
+            <param name="BASIS" value="1.0" />
+            <param name="MURC" value="1.0" />
+            <param name="RSI" value="0.0598" />
+            <param name="RSO" value="0.063" />
+            <param name="RHOS" value="2.14E-7" />
+            <param name="MURS" value="1.0" />
+            <param name="RAI" value="0.0672" />
+            <param name="RAO" value="0.0732" />
+            <param name="ANW" value="68.0" />
+            <param name="DW" value="0.006" />
+            <param name="RHOAW" value="1.38E-7" />
+            <param name="SA" value="0.048" />
+            <param name="MURA" value="10.0" />
+            <param name="H" value="1.0" />
+            <param name="RHOG" value="0.67" />
+            <param name="MURG" value="1.0" />
+          </paramlist>
+        </User>
+        <User classid="UserCmp" name="Analytical_Check:AN_Block2" id="1274500022" x="414" y="162" w="144" h="63" z="1" orient="0" defn="Analytical_Check:AN_Block2" link="-1" q="4">
+          <paramlist link="-1" name="" crc="59097990">
+            <param name="Name" value="Block2" />
+            <param name="WK1" value="0.733" />
+            <param name="WK2" value="0.3179" />
+          </paramlist>
+        </User>
+        <User classid="UserCmp" name="Analytical_Check:AN_Block3" id="1274500023" x="414" y="270" w="136" h="63" z="1" orient="0" defn="Analytical_Check:AN_Block3" link="-1" q="4">
+          <paramlist link="-1" name="" crc="7384997">
+            <param name="Name" value="Block3" />
+            <param name="RTZ" value="0.0805" />
+            <param name="MUR12" value="1.0" />
+            <param name="MUR23" value="1.0" />
+            <param name="MUR34" value="1.0" />
+          </paramlist>
+        </User>
+        <User classid="UserCmp" name="Analytical_Check:AN_Block4" id="1274500024" x="666" y="234" w="144" h="63" z="1" orient="0" defn="Analytical_Check:AN_Block4" link="-1" q="4">
+          <paramlist link="-1" name="" crc="73614002">
+            <param name="Name" value="Block4" />
+            <param name="RCC" value="0.0664234459" />
+            <param name="RCS" value="0.0538612607" />
+            <param name="RCA" value="0.0522315744" />
+            <param name="RSS" value="0.227206749" />
+            <param name="RSA" value="0.0522315744" />
+            <param name="RAA" value="0.126711156" />
+            <param name="LCC" value="1.75154854" />
+            <param name="LCS" value="1.57395243" />
+            <param name="LCA" value="1.46827675" />
+            <param name="LSS" value="1.57221519" />
+            <param name="LSA" value="1.46827675" />
+            <param name="LAA" value="1.43996441" />
+          </paramlist>
+        </User>
+        <User classid="UserCmp" name="Analytical_Check:AN_Block5" id="1274500025" x="414" y="378" w="130" h="63" z="1" orient="0" defn="Analytical_Check:AN_Block5" link="-1" q="4">
+          <paramlist link="-1" name="" crc="73015379">
+            <param name="Name" value="Block5" />
+            <param name="RINSO" value="0.054375" />
+            <param name="RTY" value="0.0798" />
+            <param name="ERCS" value="2.4" />
+            <param name="ERSA" value="2.4" />
+            <param name="ERAG" value="2.4" />
+            <param name="TDCS" value="0.0" />
+            <param name="TDSA" value="0.0" />
+            <param name="TDAG" value="0.0" />
+            <param name="YCC" value="7.053206250E-08" />
+            <param name="YSS" value="7.204682270E-07" />
+            <param name="YSA" value="-6.499361650E-07" />
+            <param name="YAA" value="1.135825780E-06" />
+          </paramlist>
+        </User>
+      </schematic>
+      <references>
+      </references>
+    </Definition>
+  </definitions>
+  <hierarchy>
+    <call link="292767715" name="Analytical_Check:Station" z="-1" view="false" instance="0">
+      <call link="1604938916" name="Analytical_Check:Main" z="-1" view="true" instance="0" />
+    </call>
+  </hierarchy>
+</project>
