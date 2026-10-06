@@ -1,0 +1,72 @@
+Cable Summary:
+   {
+   Cable Name = 525Kv_Subsea_Cable
+   Cable Length = 100.0
+   Steady State Frequency = 50.0
+   }
+! This should be in a section called TLINE-INPUT-DATA
+Frequency Dep. (Phase) Model Options:
+   {
+   Interpolate Travel Times = 1
+   Infinite Line Length = 0
+   Curve Fitting Start Frequency = 0.5
+   Curve Fitting End Frequency = 1000000.0
+   Total Number of Frequency Increments = 100
+   Maximum # of Poles for Surge Admittance Fit = 20
+   Maximum # of Poles for Attenuation Constant Fit = 20
+   Maximum Fitting Error (%) for Surge Admittance = 0.2
+   Maximum Fitting Error (%) for Attenuation Constant = 0.2
+   Maximum Residue/Pole Ratio Tolerance = 2000000.0
+   Weighting Factor 1 = 1.0
+   Weighting Factor 2 = 1000.0
+   Weighting Factor 3 = 1.0
+   Write Detailed Output Files = 0
+   }
+! This should be in a section called TLINE-INPUT-DATA
+Line Constants Ground Data:
+   {
+   Ground Resistivity Type = 0
+   GroundResistivity = 0.67
+   GroundPermeability = 1.0
+   EarthImpedanceFormula = 0
+   EarthUImpedanceFormula = 2
+   EarthMImpedanceFormula = 2
+   }
+ Coax Cable:
+   {
+   Cable Number = 1
+   P1 = 0.0 1.0
+   Layers = 5
+   Ground Last Layer = 0
+   Conductor Inner Radius = 0.0
+   Conductor Outer Radius = 0.03
+   Conductor Resistivity = 2.035752e-08
+   Conductor Permeability = 1.0
+   Insulator 1 Outer Radius = 0.0598
+   Insulator 1 Relative Permittivity = 2.4
+   Insulator 1 Relative Permeability = 1.0
+   Semi-conducting layers = 1
+   Inner semi-conductor layer thickness = 0.002
+   Outer semi-conductor layer thickness = 0.0018
+   Sheath Outer Radius = 0.063
+   Sheath Resistivity = 2.14e-07
+   Sheath Permeability = 1.0
+   Insulator 2 Outer Radius = 0.0672
+   Insulator 2 Relative Permittivity = 2.4
+   Insulator 2 Relative Permeability = 1.0
+   Armour Outer Radius = 0.0732
+   Armour Resistivity = 1.9907068e-07
+   Armour Permeability = 10.0
+   Insulator 3 Outer Radius = 0.0798
+   Insulator 3 Relative Permittivity = 2.4
+   Insulator 3 Relative Permeability = 1.0
+   }
+! This should be in a section called TLINE-INPUT-DATA
+Output File Display Options:
+   {
+   Frequency for Calculation = 50.0
+   Zero Tolerance for Display = 1.0e-19
+   Base Voltage for Display = 230.0
+   Base MVA for Display = 100.0
+   Create PI-Section = 0
+   }

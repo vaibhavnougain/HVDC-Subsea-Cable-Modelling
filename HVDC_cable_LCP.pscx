@@ -1,0 +1,297 @@
+<project name="HVDC_cable_LCP" version="4.6.2" schema="" Target="EMTDC">
+  <paramlist name="Settings">
+    <param name="creator" value="t18ma25,1782981525" />
+    <param name="time_duration" value="0.5" />
+    <param name="time_step" value="50" />
+    <param name="sample_step" value="250" />
+    <param name="chatter_threshold" value=".001" />
+    <param name="branch_threshold" value=".0005" />
+    <param name="StartType" value="0" />
+    <param name="PlotType" value="0" />
+    <param name="output_filename" value="$(Namespace).out" />
+    <param name="SnapType" value="0" />
+    <param name="SnapTime" value="0.3" />
+    <param name="snapshot_filename" value="$(Namespace).snp" />
+    <param name="MrunType" value="0" />
+    <param name="Mruns" value="1" />
+    <param name="Scenario" value="" />
+    <param name="Advanced" value="2047" />
+    <param name="Options" value="16" />
+    <param name="Build" value="18" />
+    <param name="Warn" value="5" />
+    <param name="Check" value="0" />
+    <param name="description" value="" />
+    <param name="revisor" value="t18ma25, 1791211949" />
+    <param name="labels" value="" />
+    <param name="Source" value="&quot;C:\Users\t18ma25\Documents\analytical_rlc.f&quot;" />
+    <param name="Preprocessor" value="" />
+  </paramlist>
+  <paramlist name="Libs" />
+  <Layers />
+  <List classid="Settings" />
+  <definitions>
+    <Definition classid="UserCmpDefn" name="Analytical_Block1" group="" url="" version="" build="" crc="85864971" instances="0" key="" view="false" date="0" id="192998256">
+      <paramlist name="">
+        <param name="Description" value="" />
+      </paramlist>
+      <form name="" w="320" h="400" splitter="60">
+        <category name="Configuration" visible="true">
+          <cond />
+          <parameter desc="Name" name="Name" group="" type="Text" helpmode="Append" allowemptystr="True">
+            <value />
+            <cond />
+            <help />
+            <regex />
+            <error_msg />
+          </parameter>
+        </category>
+      </form>
+      <svg viewBox="-200 -200 200 200" size="4">
+        <cond><![CDATA[true]]></cond>
+        <rect x="-39" y="-39" width="78" height="78" stroke="black" stroke-width="0.2" stroke-dasharray="none" fill-style="Hollow" fill-fg="black" fill-bg="black" />
+      </svg>
+      <script>
+        <segment name="Fortran"><![CDATA[#LOCAL REAL W
+#LOCAL REAL ACEQ
+#LOCAL REAL RHOCEF
+#LOCAL REAL AS
+#LOCAL REAL RSDC
+#LOCAL REAL AAW
+#LOCAL REAL RADC
+#LOCAL REAL AAEQ
+#LOCAL REAL RHOAEF
+#LOCAL REAL HH
+#LOCAL REAL QC
+#LOCAL REAL QS
+#LOCAL REAL QA
+#LOCAL REAL QG
+
+      CALL ANBLK1 (50.0D0, 0.03D0, 0.0025D0, 1.7241D-8, 0.02D0,
+     &             0.0072D0, 1.0D0, 1.0D0,
+     &             0.0598D0, 0.063D0, 2.14D-7, 1.0D0,
+     &             0.0672D0, 0.0732D0, 68.0D0, 0.006D0, 1.38D-7,
+     &             0.048D0, 10.0D0,
+     &             1.0D0, 0.67D0, 1.0D0,
+     &             W, ACEQ, RHOCEF, AS, RSDC, AAW, RADC,
+     &             AAEQ, RHOAEF, HH, QC, QS, QA, QG)
+      CALL ANDUMP1 ('block1_out.txt', W, ACEQ, RHOCEF, AS, RSDC,
+     &              AAW, RADC, AAEQ, RHOAEF, HH, QC, QS, QA, QG)]]></segment>
+        <segment name="Branch"><![CDATA[]]></segment>
+        <segment name="Computations"><![CDATA[]]></segment>
+      </script>
+    </Definition>
+    <Definition classid="RowDefn" name="Cable_1" group="" url="" version="RowDefn" build="RowDefn" crc="23557338" key="" view="false" date="1791211882" id="1350170251">
+      <paramlist name="">
+        <param name="Description" value="" />
+        <param name="type" value="Cable" />
+      </paramlist>
+      <schematic classid="RowCanvas">
+        <paramlist>
+          <param name="show_grid" value="0" />
+          <param name="size" value="0" />
+          <param name="orient" value="1" />
+          <param name="show_border" value="0" />
+        </paramlist>
+        <User classid="UserCmp" name="master:Line_FrePhase_Options" id="1601121412" x="576" y="180" w="521" h="234" z="-1" orient="0" defn="master:Line_FrePhase_Options" link="-1" q="4">
+          <paramlist link="-1" name="" crc="93869579">
+            <param name="Interp1" value="1" />
+            <param name="Output" value="0" />
+            <param name="Inflen" value="0" />
+            <param name="FS" value="0.5" />
+            <param name="FE" value="1.0E6" />
+            <param name="Numf" value="100" />
+            <param name="YMaxP" value="20" />
+            <param name="YMaxE" value="0.2" />
+            <param name="AMaxP" value="20" />
+            <param name="AMaxE" value="0.2" />
+            <param name="MaxRPtol" value="2.0e6" />
+            <param name="W1" value="1.0" />
+            <param name="W2" value="1000.0" />
+            <param name="W3" value="1.0" />
+            <param name="CPASS" value="0" />
+            <param name="NFP" value="50" />
+            <param name="FSP" value="0.001" />
+            <param name="FEP" value="1000.0" />
+            <param name="DCenab" value="0" />
+            <param name="DCCOR" value="1" />
+            <param name="ECLS" value="1" />
+            <param name="shntcab" value="1.0E-9" />
+          </paramlist>
+        </User>
+        <User classid="UserCmp" name="master:Line_Ground" id="1440302893" x="396" y="270" w="789" h="85" z="-1" orient="0" defn="master:Line_Ground" link="-1" q="4">
+          <paramlist link="-1" name="" crc="3950324">
+            <param name="EarthForm2" value="0" />
+            <param name="EarthForm" value="2" />
+            <param name="EarthForm3" value="2" />
+            <param name="GrRho" value="0" />
+            <param name="GRRES" value="0.67" />
+            <param name="GPERM" value="1.0" />
+            <param name="K0" value="0.001" />
+            <param name="K1" value="0.01" />
+            <param name="alpha" value="0.7" />
+          </paramlist>
+        </User>
+        <paramlist>
+          <param name="show_grid" value="0" />
+          <param name="size" value="0" />
+          <param name="orient" value="1" />
+          <param name="show_border" value="0" />
+        </paramlist>
+        <User classid="UserCmp" name="master:Cable_Coax" id="1610010773" x="1026" y="270" w="319" h="489" z="-1" orient="0" defn="master:Cable_Coax" link="-1" q="4">
+          <paramlist link="-1" name="" crc="134056348">
+            <param name="CABNUM" value="1" />
+            <param name="OHC" value="0" />
+            <param name="Y" value="1.0 [m]" />
+            <param name="ShuntA" value="1.0e-11 [mho/m]" />
+            <param name="Y2" value="2.0 [m]" />
+            <param name="X" value="0.0 [m]" />
+            <param name="LL" value="5" />
+            <param name="RorT" value="1" />
+            <param name="LC" value="0" />
+            <param name="elim1" value="0" />
+            <param name="elim2" value="0" />
+            <param name="elim3" value="0" />
+            <param name="SHRad" value="1" />
+            <param name="CONNAM1" value="Conductor" />
+            <param name="CONNAM2" value="Sheath" />
+            <param name="CONNAM3" value="Armour" />
+            <param name="CONNAM4" value="Outer Conductor" />
+            <param name="CROSSBOND" value="0" />
+            <param name="GROUPNO" value="1" />
+            <param name="CBC1" value="0" />
+            <param name="CBC2" value="1" />
+            <param name="CBC3" value="0" />
+            <param name="CBC4" value="0" />
+            <param name="R1" value="0.0 [m]" />
+            <param name="R2" value="0.030 [m]" />
+            <param name="RHOC" value="2.035752e-8 [ohm*m]" />
+            <param name="PERMC" value="1.0" />
+            <param name="R3" value="0.0598 [m]" />
+            <param name="T3" value="0.0260 [m]" />
+            <param name="EPS1" value="2.4" />
+            <param name="PERM1" value="1.0" />
+            <param name="SemiCL" value="1" />
+            <param name="SL1" value="0.002 [m]" />
+            <param name="SL2" value="0.0018 [m]" />
+            <param name="R4" value="0.063 [m]" />
+            <param name="T4" value="0.0032 [m]" />
+            <param name="RHOS" value="2.14e-7 [ohm*m]" />
+            <param name="PERMS" value="1.0" />
+            <param name="R5" value="0.0672 [m]" />
+            <param name="T5" value="0.0042 [m]" />
+            <param name="EPS2" value="2.4" />
+            <param name="PERM2" value="1.0" />
+            <param name="R6" value="0.0732 [m]" />
+            <param name="T6" value="0.0060 [m]" />
+            <param name="RHOA" value="1.9907068e-7 [ohm*m]" />
+            <param name="PERMA" value="10.0" />
+            <param name="R7" value="0.0798 [m]" />
+            <param name="T7" value="0.0066 [m]" />
+            <param name="EPS3" value="2.4" />
+            <param name="PERM3" value="1.0" />
+            <param name="R8" value="0.07 [m]" />
+            <param name="T8" value="0.0065 [m]" />
+            <param name="RHOO" value="1.8e-7 [ohm*m]" />
+            <param name="PERMO" value="400.0" />
+            <param name="R9" value="0.08 [m]" />
+            <param name="T9" value="0.01 [m]" />
+            <param name="EPS4" value="1.0" />
+            <param name="PERM4" value="1.0" />
+          </paramlist>
+        </User>
+        <User classid="UserCmp" name="master:Line_Out_Disp" id="2086397590" x="396" y="414" w="340" h="202" z="-1" orient="0" defn="master:Line_Out_Disp" link="-1" q="4">
+          <paramlist link="-1" name="" crc="95102884">
+            <param name="DataF" value="50.0 [Hz]" />
+            <param name="Zero_Tol" value="1.0E-19" />
+            <param name="Vbase" value="230.0 [kV]" />
+            <param name="MVAbase" value="100.0 [MVA]" />
+            <param name="picomp" value="0" />
+            <param name="Rip" value="1.0E5 [ohm]" />
+          </paramlist>
+        </User>
+      </schematic>
+      <references />
+    </Definition>
+    <Definition classid="StationDefn" name="Station" id="1019920605" group="" url="" version="" build="" crc="43984760" view="false">
+      <paramlist name="">
+        <param name="Description" value="" />
+      </paramlist>
+      <schematic classid="StationCanvas">
+        <paramlist>
+          <param name="show_grid" value="0" />
+          <param name="size" value="0" />
+          <param name="orient" value="1" />
+          <param name="show_border" value="0" />
+          <param name="monitor_bus_voltage" value="0" />
+          <param name="show_signal" value="0" />
+          <param name="show_virtual" value="0" />
+          <param name="show_sequence" value="0" />
+          <param name="auto_sequence" value="1" />
+        </paramlist>
+        <Wire classid="WireBranch" id="280605881" name="STUB" x="180" y="180" w="68" h="82" orient="0" defn="STUB" recv="-1" send="-1" back="-1">
+          <vertex x="0" y="0" />
+          <vertex x="0" y="18" />
+          <vertex x="54" y="54" />
+          <vertex x="54" y="72" />
+          <User classid="UserCmp" name="HVDC_cable_LCP:Main" id="280605881" x="0" y="0" w="0" h="0" z="-1" orient="0" defn="HVDC_cable_LCP:Main" link="280605881" q="4">
+            <paramlist link="-1" name="" crc="4361682" />
+          </User>
+        </Wire>
+      </schematic>
+    </Definition>
+    <Definition classid="UserCmpDefn" name="Main" id="1904488133" group="" url="" version="" build="" crc="64416859" view="false" date="0">
+      <paramlist name="">
+        <param name="Description" value="" />
+      </paramlist>
+      <form name="" w="320" h="400" splitter="60" />
+      <svg viewBox="-200 -200 200 200" size="2">
+        <rect x="-36" y="-36" width="72" height="72" stroke="Black" stroke-dasharray="none" stroke-width="0.2" fill-style="Hollow" fill-fg="" fill-bg="" />
+        <text x="0" y="0" stroke="Black" fill="Black" font-size="Small"><![CDATA[%:Name]]></text>
+      </svg>
+      <schematic classid="UserCanvas">
+        <paramlist>
+          <param name="show_grid" value="0" />
+          <param name="size" value="0" />
+          <param name="orient" value="1" />
+          <param name="show_border" value="0" />
+          <param name="monitor_bus_voltage" value="0" />
+          <param name="show_signal" value="0" />
+          <param name="show_virtual" value="0" />
+          <param name="show_sequence" value="0" />
+          <param name="auto_sequence" value="1" />
+        </paramlist>
+        <Wire classid="Cable" id="50662611" name="HVDC_cable_LCP:Cable_1" x="630" y="198" w="122" h="124" orient="0" defn="HVDC_cable_LCP:Cable_1" recv="-1" send="-1" back="-1">
+          <vertex x="0" y="0" />
+          <vertex x="0" y="18" />
+          <vertex x="54" y="54" />
+          <vertex x="54" y="72" />
+          <User classid="UserCmp" name="HVDC_cable_LCP:Cable_1" id="50662611" x="0" y="0" w="0" h="0" z="-1" orient="0" defn="HVDC_cable_LCP:Cable_1" link="50662611" q="4">
+            <paramlist link="-1" name="" crc="0">
+              <param name="Name" value="525Kv_Subsea_Cable" />
+              <param name="Freq" value="50" />
+              <param name="Length" value="100.0 [km]" />
+              <param name="Dim" value="0" />
+              <param name="Mode" value="0" />
+              <param name="CoupleEnab" value="0" />
+              <param name="CoupleName" value="row" />
+              <param name="CoupleOffset" value="0.0 [m]" />
+              <param name="CoupleRef" value="0" />
+              <param name="gen_cnst" value="1" />
+              <param name="const_path" value="C:\Temp\my_constants_file.tlo" />
+              <param name="Date" value="-1" />
+            </paramlist>
+          </User>
+        </Wire>
+      </schematic>
+      <references>
+      </references>
+    </Definition>
+  </definitions>
+  <hierarchy>
+    <call link="1413138655" name="HVDC_cable_LCP:Station" z="-1" view="false" instance="0">
+      <call link="280605881" name="HVDC_cable_LCP:Main" z="-1" view="false" instance="0">
+        <call link="50662611" name="HVDC_cable_LCP:Cable_1" z="-1" view="true" instance="0" />
+      </call>
+    </call>
+  </hierarchy>
+</project>
