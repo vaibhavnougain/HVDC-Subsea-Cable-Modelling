@@ -1,0 +1,331 @@
+======================================================================
+ANALYTICAL PRIMITIVE PARAMETERS OF A 525 kV ARMOURED HVDC SUBMARINE
+CABLE, COMPUTED INSIDE PSCAD, BENCHMARKED AGAINST PSCAD LINE
+CONSTANTS AT 50 Hz.
+======================================================================
+RUN AT          : 2026-10-05  14:29:21
+VERDICT         : GOOD RUN.  All 9 structural checks PASS.
+R  diff [%]     : mean  0.170761  max  0.208586
+L  diff [%]     : mean  0.019985  max  0.021184
+Y  diff [%]     : mean  9.9955E-08  max  4.2751E-07
+----------------------------------------------------------------------
+If the RUN AT time above is not the time you just pressed Run, this
+file is left over from an earlier run and the code did not execute.
+======================================================================
+ 
+Source   : analytical_rlc.f, five-block version
+Blocks   : ANB1 geometry and materials, ANB2 conductor impedances,
+           ANB3 magnetic regions and seabed, ANB4 series assembly,
+           ANB5 shunt side
+Sections : 0 inputs, 1-5 blocks, 6 structural checks,
+           7 comparison against PSCAD Line Constants
+Written to : C:\Users\t18ma25\PSCAD_Work\HVDC_Analytical_Blocks\analytical_all_out.txt
+ 
+ 
+SECTION 0   INPUTS
+----------------------------------------------------------------------
+Each value below is owned by a block dialog on the PSCAD canvas,
+except gamma_E and eps_0 which are fixed constants held in the code.
+Originally transcribed from Cable_1.cli, PSCAD's own echo of the
+Line Constants input deck, so both routes start from one identical
+input set.  If a number here is not what you expect, the block
+dialog has been edited.
+ 
+from BLOCK 1 dialog:
+        f            [Hz]     5.0000000000000000E+01
+         r_c          [m]     2.9999999999999999E-02
+        A_c,man      [m2]     2.5000000000000001E-03
+     rho_c0       [ohm.m]     1.7240999999999999E-08
+         s_c          [-]     2.0000000000000000E-02
+    R_c,man      [ohm/km]     7.1999999999999998E-03
+         basis (1=man)[-]     1.0000000000000000E+00
+         mu_r,c       [-]     1.0000000000000000E+00
+         r_s,i        [m]     5.9799999999999999E-02
+         r_s,o        [m]     6.3000000000000000E-02
+     rho_s        [ohm.m]     2.1400000000000001E-07
+         mu_r,s       [-]     1.0000000000000000E+00
+         r_a,i        [m]     6.7199999999999996E-02
+         r_a,o        [m]     7.3200000000000001E-02
+         n_a,w        [-]     6.8000000000000000E+01
+         d_w          [m]     6.0000000000000001E-03
+     rho_a,w      [ohm.m]     1.3799999999999999E-07
+         s_a (lay)    [-]     4.8000000000000001E-02
+         mu_r,a       [-]     1.0000000000000000E+01
+         h burial     [m]     1.0000000000000000E+00
+     rho_g        [ohm.m]     6.7000000000000004E-01
+         mu_r,g       [-]     1.0000000000000000E+00
+ 
+from BLOCK 3 dialog:
+         r_t,Z series [m]     8.0500000000000002E-02
+         mu_r region12[-]     1.0000000000000000E+00
+         mu_r region23[-]     1.0000000000000000E+00
+         mu_r region34[-]     1.0000000000000000E+00
+ 
+from BLOCK 5 dialog:
+         r_ins,o      [m]     5.4375000000000000E-02
+         r_t,Y shunt  [m]     7.9799999999999996E-02
+         eps_r core-sh[-]     2.3999999999999999E+00
+         eps_r sh-arm [-]     2.3999999999999999E+00
+         eps_r arm-gnd[-]     2.3999999999999999E+00
+         tan d core-sh[-]     0.0000000000000000E+00
+         tan d sh-arm [-]     0.0000000000000000E+00
+         tan d arm-gnd[-]     0.0000000000000000E+00
+ 
+fixed constants held in the code:
+         gamma_E      [-]     1.7810724179999999E+00
+       eps_0        [F/m]     8.8541878130000006E-12
+ 
+NOTE  r_t,Z = 0.0805 m is the series modelling radius; the shunt side
+uses r_t,Y = 0.0798 m, the physical outer radius implied by the
+entered layer thicknesses.  In the series model r_t,Z cancels
+identically between z34 and the -ln(D) term of z0, so the choice does
+not affect Z.  This is verified in SECTION 6.
+ 
+ 
+SECTION 1   BLOCK 1   EQUIVALENT PROPERTIES AND PENETRATION FACTORS
+----------------------------------------------------------------------
+Paper E1-E13.  Replaces the stranded core with a SOLID CYLINDER and
+the 68 armour wires with ONE TUBE, in both cases keeping the geometry
+and adjusting the resistivity so the DC resistance is unchanged.  Then
+forms q = 1/delta for each layer.  The sheath needs no equivalencing:
+it is already a continuous tube, so its own resistivity is used.
+ 
+rho_c,eff is ~18 % above pure copper because the solid cylinder spans a
+larger area than the stranded copper (factor 1.1310) and the datasheet
+resistance already includes lay and temperature (factor 1.0440).
+ 
+     omega        [rad/s]     3.1415926535897933E+02
+        A_c,eq       [m2]     2.8274333882308137E-03
+     rho_c,eff    [ohm.m]     2.0357520395261859E-08
+        A_s          [m2]     1.2345202491546457E-03
+    R_s,dc       [ohm/km]     1.7334669086759766E-01
+        A_a,w        [m2]     1.9226547039969534E-03
+    R_a,dc       [ohm/km]     7.5220995064451859E-02
+        A_a,eq       [m2]     2.6464776513840439E-03
+     rho_a,eff    [ohm.m]     1.9907068235294133E-07
+         H = 2h       [m]     2.0000000000000000E+00
+       q_c          [1/m]     9.8469658383639782E+01
+       q_s          [1/m]     3.0370922519430462E+01
+       q_a          [1/m]     9.9577499848314545E+01
+       q_g          [1/m]     1.7164354247944665E-02
+ 
+Skin depths delta = 1/q [mm]:
+        delta_c      [mm]     1.0155412503859614E+01
+        delta_s      [mm]     3.2926230652369156E+01
+        delta_a      [mm]     1.0042429278936410E+01
+        delta_g      [mm]     5.8260275076747756E+04
+ 
+NOTATION  the paper uses the COMPLEX constant m of Eq. (3a); q above
+is the real building block, and m = (1 + j) q.  SECTION 2 prints m
+and SECTION 6 checks Re(m) = Im(m) = q numerically.
+ 
+ 
+SECTION 2   BLOCK 2   INTERNAL, SURFACE AND TRANSFER IMPEDANCES
+----------------------------------------------------------------------
+Paper Eq. (3a), (4), (5a)-(5d).  All values ohm/km.
+Computed in complex arithmetic directly, where the spreadsheet must
+split coth and csch into real and imaginary parts by hand.  Agreement
+between the two routes therefore also verifies that hand split.
+ 
+                                real                       imag
+       m_c          [1/m]     9.8469658383639782E+01     9.8469658383639782E+01
+       m_s          [1/m]     3.0370922519430462E+01     3.0370922519430462E+01
+       m_a          [1/m]     9.9577499848314545E+01     9.9577499848314545E+01
+             z_c core int     1.2559571098132891E-02     1.0785021738573030E-02
+            z2i sheath in     1.7334810230165620E-01     1.1207440037684204E-03
+            z2m sheath tr     1.7334548804587963E-01    -5.4576831486046644E-04
+           z2o sheath out     1.7334803060976750E-01     1.0638173242119289E-03
+          z2w sheath wall     5.1568196644535824E-06     3.2760979577012824E-03
+            z3i armour in     7.6106726277644476E-02     1.8639750257283799E-02
+            z3m armour tr     7.4479582535035491E-02    -8.8945830370329958E-03
+           z3o armour out     7.6034125358530325E-02     1.7111901875539227E-02
+          z3w armour wall     3.1816865661038196E-03     5.3540818206889017E-02
+ 
+CONDITIONING  z2w = z2i + z2o - 2 z2m is a cancellation of about
+30 000 to 1 in the real part, so Re(z2w) carries fewer significant
+digits than its inputs.  Harmless at this sheath thickness, but worth
+a sentence if a reviewer asks about numerical conditioning.
+ 
+ 
+SECTION 3   BLOCK 3   MAGNETIC REGIONS AND SEABED RETURN
+----------------------------------------------------------------------
+Paper Eq. (6a)-(6d) and (7a)-(7c).  All values ohm/km.
+ 
+                                real                       imag
+          z12 core-sheath     0.0000000000000000E+00     4.3341932452335995E-02
+           z23 sheath-arm     0.0000000000000000E+00     4.0550748775868631E-03
+          z34 arm-surface     0.0000000000000000E+00     5.9729067542918565E-03
+       m_g          [1/m]     1.7164354247944665E-02     1.7164354247944665E-02
+                z0 seabed     5.0785979584352284E-02     4.2919752001542821E-01
+            zE = z34 + z0     5.0785979584352284E-02     4.3517042676972006E-01
+ 
+KNOWN FORMULATION DIFFERENCE.  Eq. (7b) is the Wedepohl-Wilcox
+LOGARITHMIC APPROXIMATION to the earth-return integral.  PSCAD Line
+Constants evaluates the exact Pollaczek integral.  The two differ by
+about -0.21 % on the earth-return resistance, propagating to -0.16 %
+on Rcc.  zE appears in EVERY entry of the primitive matrix, which is
+why SECTION 7 shows one shared offset rather than nine independent
+errors.  This is a formulation difference, not an input error.
+ 
+ 
+SECTION 4   BLOCK 4   PRIMITIVE SERIES MATRIX
+----------------------------------------------------------------------
+Paper Eq. (8a)-(8f), (9) and section 2.5.  Conductor order [c, s, a].
+Z in ohm/km, R = Re(Z) in ohm/km, L = Im(Z)/omega in mH/km.
+ 
+Z                               real                       imag
+   Z(1,1)                  6.6532394068253453E-02     5.5016937200280625E-01
+   Z(1,2)                  5.3970208714343978E-02     4.9437590549326832E-01
+   Z(1,3)                  5.2340522407847118E-02     4.6117691168229230E-01
+   Z(2,1)                  5.3970208714343978E-02     4.9437590549326832E-01
+   Z(2,2)                  2.2731569676022362E-01     4.9383013717840785E-01
+   Z(2,3)                  5.2340522407847118E-02     4.6117691168229230E-01
+   Z(3,1)                  5.2340522407847118E-02     4.6117691168229230E-01
+   Z(3,2)                  5.2340522407847118E-02     4.6117691168229230E-01
+   Z(3,3)                  1.2682010494288259E-01     4.5228232864525930E-01
+ 
+R [ohm/km]
+     6.6532394068253453E-02    5.3970208714343978E-02    5.2340522407847118E-02
+     5.3970208714343978E-02    2.2731569676022362E-01    5.2340522407847118E-02
+     5.2340522407847118E-02    5.2340522407847118E-02    1.2682010494288259E-01
+ 
+L [mH/km]
+     1.7512435018402084E+00    1.5736473820957069E+00    1.4679717026818255E+00
+     1.5736473820957069E+00    1.5719101475938473E+00    1.4679717026818255E+00
+     1.4679717026818255E+00    1.4679717026818255E+00    1.4396593655401229E+00
+ 
+ 
+SECTION 5   BLOCK 5   PRIMITIVE SHUNT MATRIX
+----------------------------------------------------------------------
+Paper Eq. (10)-(14).  The shunt side is derived independently of the
+series side from an electrostatic problem, so Y is NOT the inverse
+of Z.  p in m/F, c and C in uF/km, G and Y in S/m.
+ 
+       p_cs         [m/F]     4.4541341099820948E+09
+       p_sa         [m/F]     4.8336941775563431E+08
+       p_ag         [m/F]     6.4656510121832454E+08
+     c_cs         [uF/km]     2.2451052781704858E-01
+     c_sa         [uF/km]     2.0688110651335134E+00
+     c_ag         [uF/km]     1.5466346669742876E+00
+ 
+C [uF/km], closed form of Eq. (12i)
+     2.2451052781704858E-01   -2.2451052781704858E-01    0.0000000000000000E+00
+    -2.2451052781704858E-01    2.2933215929505617E+00   -2.0688110651335134E+00
+     0.0000000000000000E+00   -2.0688110651335134E+00    3.6154457321078008E+00
+ 
+C [uF/km], numerical inverse of P from Eq. (12g)
+     2.2451052781704856E-01   -2.2451052781704856E-01    0.0000000000000000E+00
+    -2.2451052781704856E-01    2.2933215929505613E+00   -2.0688110651335130E+00
+     0.0000000000000000E+00   -2.0688110651335130E+00    3.6154457321078004E+00
+ 
+G [S/m]
+     0.0000000000000000E+00    0.0000000000000000E+00    0.0000000000000000E+00
+     0.0000000000000000E+00    0.0000000000000000E+00    0.0000000000000000E+00
+     0.0000000000000000E+00    0.0000000000000000E+00    0.0000000000000000E+00
+ 
+Y = G + j omega C   [S/m]      real                       imag
+   Y(1,1)                  0.0000000000000000E+00     7.0532062484360676E-08
+   Y(1,2)                  0.0000000000000000E+00    -7.0532062484360676E-08
+   Y(1,3)                  0.0000000000000000E+00     0.0000000000000000E+00
+   Y(2,1)                  0.0000000000000000E+00    -7.0532062484360676E-08
+   Y(2,2)                  0.0000000000000000E+00     7.2046822687323270E-07
+   Y(2,3)                  0.0000000000000000E+00    -6.4993616438887210E-07
+   Y(3,1)                  0.0000000000000000E+00     0.0000000000000000E+00
+   Y(3,2)                  0.0000000000000000E+00    -6.4993616438887210E-07
+   Y(3,3)                  0.0000000000000000E+00     1.1358257751442438E-06
+ 
+ 
+SECTION 6   STRUCTURAL CHECKS
+----------------------------------------------------------------------
+Properties the model must satisfy by physics or by construction.  A
+broken implementation fails these even when its numbers look
+plausible, so they test correctness rather than agreement.
+ 
+   magnetic regions carry no loss, Re(z12,z23,z34) = 0     PASS
+   reciprocity, Zcs=Zsc and Zca=Zac and Zsa=Zas            PASS
+   Zca = Zsa exactly, as Eq. (8c) and (8e) require         PASS
+   continuous sheath shields core from armour, Cca = 0     PASS
+   closed-form C equals numerical inverse of P, to 1e-12   PASS
+   G identically zero, all three tan delta are zero        PASS
+   m = (1+j)q, so Re(m) = Im(m) for core, sheath, armour   PASS
+   Re(m) equals block-1 q for every layer                  PASS
+   z34 is lossless, so Re(zE) = Re(z0)                     PASS
+ 
+All nine PASS.  SECTION 7 may be used.
+ 
+ 
+SECTION 7   COMPARISON AGAINST PSCAD LINE CONSTANTS AT 50 Hz
+----------------------------------------------------------------------
+PSCAD values are TRANSCRIBED reference data, not computed here.
+Source: HVDC_cable_draft:Main(0):Cable_1(0), PHASE DOMAIN DATA
+@ 50.000 Hz, run 3 (exact resistivities, eps_r = 2.4).
+Solver: Line Constants Program for PSCAD X4, build 2016.08.11.
+R and L carry six decimals as recorded, not PSCAD's nine
+significant figures, so these percentages are good to about three
+significant figures.  Use the full listing before publishing.
+ 
+Difference convention: 100 * |analytical - PSCAD| / |PSCAD|.
+ 
+R [ohm/km]        analytical              PSCAD            diff %
+   R(1,1)     6.65323940682535E-02     6.64234459000000E-02       0.164021
+   R(1,2)     5.39702087143440E-02     5.38612607000000E-02       0.202275
+   R(1,3)     5.23405224078471E-02     5.22315744000000E-02       0.208586
+   R(2,1)     5.39702087143440E-02     5.38612607000000E-02       0.202275
+   R(2,2)     2.27315696760224E-01     2.27206749000000E-01       0.047951
+   R(2,3)     5.23405224078471E-02     5.22315744000000E-02       0.208586
+   R(3,1)     5.23405224078471E-02     5.22315744000000E-02       0.208586
+   R(3,2)     5.23405224078471E-02     5.22315744000000E-02       0.208586
+   R(3,3)     1.26820104942883E-01     1.26711156000000E-01       0.085982
+ 
+L [mH/km]         analytical              PSCAD            diff %
+   L(1,1)     1.75124350184021E+00     1.75154854000000E+00       0.017415
+   L(1,2)     1.57364738209571E+00     1.57395243000000E+00       0.019381
+   L(1,3)     1.46797170268183E+00     1.46827675000000E+00       0.020776
+   L(2,1)     1.57364738209571E+00     1.57395243000000E+00       0.019381
+   L(2,2)     1.57191014759385E+00     1.57221519000000E+00       0.019402
+   L(2,3)     1.46797170268183E+00     1.46827675000000E+00       0.020776
+   L(3,1)     1.46797170268183E+00     1.46827675000000E+00       0.020776
+   L(3,2)     1.46797170268183E+00     1.46827675000000E+00       0.020776
+   L(3,3)     1.43965936554012E+00     1.43996441000000E+00       0.021184
+ 
+Im(Y) [S/m]       analytical              PSCAD            diff %
+   Y(1,1)     7.05320624843607E-08     7.05320625000000E-08     2.217336E-08
+   Y(1,2)    -7.05320624843607E-08    -7.05320625000000E-08     2.217336E-08
+   Y(1,3)     0.00000000000000E+00     0.00000000000000E+00      exact zero
+   Y(2,1)    -7.05320624843607E-08    -7.05320625000000E-08     2.217336E-08
+   Y(2,2)     7.20468226873233E-07     7.20468227000000E-07     1.759512E-08
+   Y(2,3)    -6.49936164388872E-07    -6.49936165000000E-07     9.402891E-08
+   Y(3,1)     0.00000000000000E+00     0.00000000000000E+00      exact zero
+   Y(3,2)    -6.49936164388872E-07    -6.49936165000000E-07     9.402891E-08
+   Y(3,3)     1.13582577514424E-06     1.13582578000000E-06     4.275089E-07
+ 
+SUMMARY.  Both averaging conventions are given because they produce
+different numbers and the manuscript must state which it uses, or a
+reviewer recomputing will not reproduce the figure.
+ 
+over all nine matrix entries:
+       R  mean / max  [%]       0.17076114       0.20858649   n = 9
+       L  mean / max  [%]       0.01998523       0.02118417   n = 9
+       Y  mean / max  [%]     9.995456E-08     4.275089E-07   n = 7
+ 
+over the six unique upper-triangle entries:
+       R  mean / max  [%]       0.15290033       0.20858649   n = 6
+       L  mean / max  [%]       0.01982239       0.02118417   n = 6
+ 
+Yca and Yac are excluded from the Y statistics: both routes give
+exactly zero there, and a percentage of zero has no meaning.
+ 
+HOW TO READ THIS TABLE.  Every resistance difference has the same
+sign and a similar size, and every inductance difference is about ten
+times smaller and almost uniform.  That is the signature of ONE
+shared cause, the earth-return term of SECTION 3, rather than nine
+independent discrepancies.  Subtracting that common offset, the
+conductor terms agree with PSCAD to about 1e-7 %.
+ 
+WHAT THIS IS NOT.  This is implementation consistency between two
+computational routes sharing one input set.  It is not independent
+physical validation, because no measurement is involved.
+ 
+======================================================================
+END OF OUTPUT
+======================================================================
